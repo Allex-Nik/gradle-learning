@@ -1,0 +1,65 @@
+plugins {
+    id 'application' // https://docs.gradle.org/current/userguide/application_plugin.html
+//    id("com.github.johnrengelman.shadow") version "8.1.1" - incompatible
+    id("com.gradleup.shadow") version "9.3.0" // https://plugins.gradle.org/plugin/com.gradleup.shadow
+}
+
+application {
+    mainClass = 'org.education.Main'
+}
+
+dependencies {
+    implementation(project(':module1'))
+}
+
+/**
+ *  cross-project configuration
+ *  https://docs.gradle.org/current/userguide/glossary.html#sub:terminology_cross_project_configuration
+ *
+ *  Cross-project configuration usually breaks Project Isolation, and Parallel Project Execution,
+ *  so you should use convention plugins or the proper APIs whenever possible
+ */
+subprojects {
+    apply plugin: 'java'
+
+    group = 'org.education'
+    version = '1.0.0'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation platform('org.junit:junit-bom:5.10.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+    }
+    // Can also use:
+    //java {
+    //    toolchain {
+    //        languageVersion = JavaLanguageVersion.of(17)
+    //    }
+    //}
+    test {
+        useJUnitPlatform() // https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-running-unit-tests-with-gradle/
+    }
+}
+
+tasks.register('info') {
+    doLast {
+        println "Java: ${System.getProperty('java.version')}"
+        println "Gradle: ${gradle.gradleVersion}"
+    }
+}
+
+tasks.register('greeting') {
+    doLast {
+        println("Hello user!")
+    }
+}
+
+info.dependsOn(greeting)
