@@ -5,6 +5,3 @@ public class DataProvider {
         return "Happy New Year!";
     }
 }
-
-// use version catalog
-// use convention plugins
