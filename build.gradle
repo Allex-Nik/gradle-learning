@@ -1,7 +1,7 @@
 plugins {
     id 'application' // https://docs.gradle.org/current/userguide/application_plugin.html
-//    id("com.github.johnrengelman.shadow") version "8.1.1" - incompatible
     id("com.gradleup.shadow") version "9.3.0" // https://plugins.gradle.org/plugin/com.gradleup.shadow
+    id('org.education.slack-notification')
 }
 
 application {
@@ -12,13 +12,8 @@ dependencies {
     implementation(project(':module1'))
 }
 
-/**
- *  cross-project configuration
- *  https://docs.gradle.org/current/userguide/glossary.html#sub:terminology_cross_project_configuration
- *
- *  Cross-project configuration usually breaks Project Isolation, and Parallel Project Execution,
- *  so you should use convention plugins or the proper APIs whenever possible
- */
+// Cross-project configuration
+// https://docs.gradle.org/current/userguide/glossary.html#sub:terminology_cross_project_configuration
 subprojects {
     apply plugin: 'java'
 
@@ -36,14 +31,11 @@ subprojects {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_17
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
     }
-    // Can also use:
-    //java {
-    //    toolchain {
-    //        languageVersion = JavaLanguageVersion.of(17)
-    //    }
-    //}
+
     test {
         useJUnitPlatform() // https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-running-unit-tests-with-gradle/
     }
@@ -56,10 +48,10 @@ tasks.register('info') {
     }
 }
 
-tasks.register('greeting') {
-    doLast {
-        println("Hello user!")
-    }
+slack {
+    token = System.getenv("SLACK_TOKEN")
+    channel = System.getenv("SLACK_CHANNEL")
+    message = "Build is running"
 }
 
-info.dependsOn(greeting)
+run.dependsOn(sendSlackMessage)

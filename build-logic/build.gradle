@@ -1,0 +1,22 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("com.slack.api:slack-api-client:1.45.3")
+    implementation 'org.apache.groovy:groovy:5.0.0'
+}
+
+gradlePlugin {
+    plugins {
+        slackNotification {
+            id = 'org.education.slack-notification'
+            implementationClass = 'org.education.SlackPlugin'
+        }
+    }
+}
