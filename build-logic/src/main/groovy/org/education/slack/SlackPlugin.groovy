@@ -1,4 +1,4 @@
-package org.education
+package org.education.slack
 
 import org.gradle.api.Project
 import org.gradle.api.Plugin

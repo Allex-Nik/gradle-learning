@@ -1,4 +1,4 @@
-package org.education
+package org.education.slack
 
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property

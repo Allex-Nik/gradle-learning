@@ -1,16 +1,22 @@
 [versions]
 junit = "5.10.0"
-shadow-version = "9.3.0"
+shadow = "9.3.0"
 release = "1.0.0"
+slack = "1.45.3"
+groovy = "5.0.0"
 
 [libraries]
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
 junit-jupyter = { group = "org.junit.jupiter", name = "junit-jupiter" }
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
+slack = { group = "com.slack.api", name = "slack-api-client", version.ref = "slack" }
+groovy = { group = "org.apache.groovy", name = "groovy", version.ref = "groovy" }
 
 [bundles]
 
 [plugins]
 app = { id = "application" }
-shadow = { id = "com.gradleup.shadow", version.ref = 'shadow-version'}
+shadow = { id = "com.gradleup.shadow", version.ref = 'shadow'}
 slack = { id = "org.education.slack-notification" }
+java-gradle = { id = "java-gradle-plugin" }
+groovy = { id = "groovy" }

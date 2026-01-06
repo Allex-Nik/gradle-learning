@@ -1,4 +1,4 @@
-package org.education
+package org.education.slack
 
 import com.slack.api.Slack
 import com.slack.api.methods.request.chat.ChatPostMessageRequest
