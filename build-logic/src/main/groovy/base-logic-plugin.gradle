@@ -1,0 +1,28 @@
+// a precompiled script plugin (convention plugin)
+
+plugins {
+    id('java')
+}
+
+group = 'org.education'
+version = libs.versions.release
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform(libs.junit.bom)
+    testImplementation libs.junit.jupyter
+    testRuntimeOnly libs.junit.platform.launcher
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+test {
+    useJUnitPlatform() // https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-running-unit-tests-with-gradle/
+}

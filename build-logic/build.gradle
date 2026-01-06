@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.java.gradle)
     alias(libs.plugins.groovy)
+    alias(libs.plugins.groovy.gradle)
 }
 
 repositories {

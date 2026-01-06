@@ -20,3 +20,4 @@ shadow = { id = "com.gradleup.shadow", version.ref = 'shadow'}
 slack = { id = "org.education.slack-notification" }
 java-gradle = { id = "java-gradle-plugin" }
 groovy = { id = "groovy" }
+groovy-gradle = { id = "groovy-gradle-plugin" }
