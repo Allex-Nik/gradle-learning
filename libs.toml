@@ -1,0 +1,16 @@
+[versions]
+junit = "5.10.0"
+shadow-version = "9.3.0"
+release = "1.0.0"
+
+[libraries]
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-jupyter = { group = "org.junit.jupiter", name = "junit-jupiter" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
+
+[bundles]
+
+[plugins]
+app = { id = "application" }
+shadow = { id = "com.gradleup.shadow", version.ref = 'shadow-version'}
+slack = { id = "org.education.slack-notification" }

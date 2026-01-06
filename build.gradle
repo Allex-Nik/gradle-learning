@@ -1,7 +1,7 @@
 plugins {
-    id 'application' // https://docs.gradle.org/current/userguide/application_plugin.html
-    id("com.gradleup.shadow") version "9.3.0" // https://plugins.gradle.org/plugin/com.gradleup.shadow
-    id('org.education.slack-notification')
+    alias(libs.plugins.app) // https://docs.gradle.org/current/userguide/application_plugin.html
+    alias(libs.plugins.shadow) // https://plugins.gradle.org/plugin/com.gradleup.shadow
+    alias(libs.plugins.slack)
 }
 
 application {
@@ -9,7 +9,7 @@ application {
 }
 
 dependencies {
-    implementation(project(':module1'))
+    implementation(projects.module1)
 }
 
 // Cross-project configuration
@@ -18,16 +18,16 @@ subprojects {
     apply plugin: 'java'
 
     group = 'org.education'
-    version = '1.0.0'
+    version = libs.versions.release
 
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        testImplementation platform('org.junit:junit-bom:5.10.0')
-        testImplementation 'org.junit.jupiter:junit-jupiter'
-        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        testImplementation platform(libs.junit.bom)
+        testImplementation libs.junit.jupyter
+        testRuntimeOnly libs.junit.platform.launcher
     }
 
     java {
